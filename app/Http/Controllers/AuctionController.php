@@ -31,7 +31,7 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -49,12 +49,14 @@ class AuctionController extends Controller
         $Aouction->price = $request->input('name');
         $Aouction->from = auth()->user()->id;
         $Aouction->to = auth()->user()->id;
-        $Aouction->item =  session()->get('itemId');
+        $Aouction->item =  $request->input('item');
+      //  $Aouction->item =  session()->get('itemId');
 
        
         $Aouction->save();
         
         return redirect('/items')->with('success', 'Item Added');
+        
     }
 
     /**
@@ -94,8 +96,8 @@ class AuctionController extends Controller
       
         $Aouction->price = $request->input('price');
         
-        $Aouction->To = auth()->user()->id;
-        
+        //$Aouction->To = auth()->user()->id;
+        $Aouction->To =  $request->input('to');
 
        
         $Aouction->save();
@@ -129,11 +131,11 @@ class AuctionController extends Controller
         $Aouction = Aouction::all();
         foreach($Aouction as $ac)
        {
-         $acto= $ac->To;
-         $acitem = Item::find($ac->item);
+    //     $acto= $ac->To;
+       //  $acitem = Item::find($ac->item);
 
-         $acitem->user_id= $acto;
-         $acitem->save();
+//         $acitem->user_id= $acto;
+    //     $acitem->save();
          $ac->delete();
        }
        

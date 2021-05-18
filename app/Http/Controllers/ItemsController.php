@@ -65,7 +65,7 @@ class ItemsController extends Controller
             //handle file upload 
             if($request->hasfile('image')){
 
-                // Get filename with the extension
+            // Get filename with the extension
             $filenameWithExt = $request->file('image')->getClientOriginalName();
             // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -198,7 +198,7 @@ class ItemsController extends Controller
     {
         $item = Item::find($id);
         
-        session()->put('itemId',$id);
+      //  session()->put('itemId',$id);
 
         if(auth()->user()->id !== $item->user_id){
             return redirect('/items')->with('error', 'Unauthorized page');
